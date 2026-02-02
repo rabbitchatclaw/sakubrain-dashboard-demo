@@ -209,7 +209,7 @@ export function useHabits(repository: IHabitRepository) {
 
 export function useIdeas(repository: IIdeaRepository) {
   const ideasState = useAsyncState<Idea[]>([]);
-  const stats = useAsyncState<IdeaStats>({ totalIdeas: 0, validatedIdeas: 0, ideasByStage: {} });
+  const stats = useAsyncState<IdeaStats>({ totalIdeas: 0, validatedIdeas: 0, ideasByStage: { idea: 0, validation: 0, mvp: 0, revenue: 0 } });
   const [filters, setFilters] = useState<IdeaFilters>({
     category: 'All',
     stage: 'All',

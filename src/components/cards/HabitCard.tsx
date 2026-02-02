@@ -139,7 +139,7 @@ function DailyGoalProgress({ dailyGoal }: DailyGoalProgressProps) {
           <p className="text-lg font-bold text-white">{dailyGoal.current}/{dailyGoal.target}</p>
         </div>
       </div>
-      <ProgressBar progress={progress} color="from-indigo-500 to-purple-500" className="mt-3" />
+      <ProgressBar progress={progress} color="from-indigo-500 to-purple-500"  />
     </div>
   );
 }

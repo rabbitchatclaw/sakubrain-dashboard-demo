@@ -74,7 +74,7 @@ function DashboardError({ onRetry }: { onRetry: () => void }) {
 
 function DashboardContent() {
   // Initialize hooks with repositories
-  const { stats } = useStats(repositories.stats);
+  const { stats, refresh: refreshStats } = useStats(repositories.stats);
   const learning = useLearning(repositories.learning);
   const habits = useHabits(repositories.habits);
   const ideas = useIdeas(repositories.ideas);
@@ -98,11 +98,11 @@ function DashboardContent() {
     return (
       <DashboardError 
         onRetry={() => {
-          stats.refresh();
-          learning.refresh();
-          habits.refresh();
-          ideas.refresh();
-          trading.refresh();
+          refreshStats();
+          learning.refresh();;
+          habits.refresh();;
+          ideas.refresh();;
+          trading.refresh();;
         }} 
       />
     );
@@ -143,7 +143,7 @@ function DashboardContent() {
           {/* Ideas Section */}
           <IdeasSectionCard
             ideas={ideas.ideas.state.data || []}
-            stats={ideas.stats.state.data || { totalIdeas: 0, validatedIdeas: 0, ideasByStage: {} }}
+            stats={ideas.stats.state.data || { totalIdeas: 0, validatedIdeas: 0, ideasByStage: { idea: 0, validation: 0, mvp: 0, revenue: 0 } }}
             filters={ideas.filters}
             expandedIdeaId={ideas.expandedIdeaId}
             onUpdateFilters={ideas.updateFilters}
