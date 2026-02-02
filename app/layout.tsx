@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ToastProvider } from '@/components/ui/Toast';
+import { ModalProvider } from '@/components/ui/Modal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950`}>
-        {children}
+        <ToastProvider>
+          <ModalProvider>
+            {children}
+          </ModalProvider>
+        </ToastProvider>
       </body>
     </html>
   );

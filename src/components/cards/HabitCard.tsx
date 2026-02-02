@@ -9,6 +9,9 @@ import { cn } from '@/lib/utils';
 import type { Habit, AtomicPrinciple, HabitStats, HabitDailyGoal } from '@/types';
 import { WEEK_DAYS } from '@/types';
 import { ProgressBar } from '@/components/ui/Common';
+import { useToast } from '@/components/ui/Toast';
+import { useModal } from '@/components/ui/Modal';
+import { AddHabitForm } from '@/components/ui/Forms';
 
 // ============================================================================
 // SUB-COMPONENTS
@@ -169,6 +172,18 @@ export function HabitTrackerCard({
   onToggleHabitDay,
   isLoading = false,
 }: HabitTrackerCardProps) {
+  const { showToast } = useToast();
+  const { openModal } = useModal();
+
+  const handleAddHabit = () => {
+    openModal(
+      <AddHabitForm onAdd={(newHabit) => {
+        showToast(`Created habit: ${newHabit.name}`, 'success');
+      }} />,
+      'Add New Habit'
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="rounded-2xl bg-slate-900/50 border border-white/10 overflow-hidden">
@@ -204,7 +219,10 @@ export function HabitTrackerCard({
               <Target className="w-4 h-4" />
               Principles
             </button>
-            <button className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg transition-colors">
+            <button 
+              onClick={handleAddHabit}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg transition-colors"
+            >
               <Plus className="w-4 h-4" />
               Add
             </button>
@@ -232,7 +250,11 @@ export function HabitTrackerCard({
             <HabitRow
               key={habit.id}
               habit={habit}
-              onToggleDay={(dayIndex) => onToggleHabitDay(habit.id, dayIndex)}
+              onToggleDay={(dayIndex) => {
+                onToggleHabitDay(habit.id, dayIndex);
+                const dayName = WEEK_DAYS[dayIndex];
+                showToast(`${habit.name} - ${dayName} ${!habit.completed[dayIndex] ? 'completed! ✓' : 'unchecked'}`, 'success');
+              }}
             />
           ))}
         </div>

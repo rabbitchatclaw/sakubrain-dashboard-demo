@@ -14,10 +14,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { BookOpen, Trophy, TrendingUp, Calendar } from 'lucide-react';
+import { BookOpen, Trophy, TrendingUp, Calendar, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Book, Skill, MonthlyLearningData, LearningTab } from '@/types';
 import { CircularProgress, TabButton } from '@/components/ui/Common';
+import { useToast } from '@/components/ui/Toast';
 
 // ============================================================================
 // SUB-COMPONENTS
@@ -228,6 +229,7 @@ export function LearningProgressCard({
   isLoading = false,
 }: LearningProgressCardProps) {
   const [activeTab, setActiveTab] = useState<LearningTab>('overview');
+  const { showToast } = useToast();
 
   const tabs = [
     { id: 'overview' as LearningTab, label: 'Overview', icon: TrendingUp },
@@ -262,9 +264,14 @@ export function LearningProgressCard({
               <p className="text-sm text-slate-400">Track your knowledge journey</p>
             </div>
           </div>
-          <button className="p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5">
-            <Calendar className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => showToast('Study schedule calendar coming soon! 📅', 'info')}
+              className="p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            >
+              <Calendar className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         <div className="flex gap-1 bg-slate-800/50 rounded-lg p-1">
@@ -272,7 +279,10 @@ export function LearningProgressCard({
             <TabButton
               key={tab.id}
               active={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                showToast(`Switched to ${tab.label} tab`, 'info');
+              }}
               icon={<tab.icon className="w-4 h-4" />}
             >
               {tab.label}

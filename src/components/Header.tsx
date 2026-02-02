@@ -7,6 +7,7 @@
 import { Brain, Bell, Settings, Menu } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/components/ui/Toast';
 
 interface NavItem {
   label: string;
@@ -22,14 +23,21 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 function DesktopNav() {
+  const { showToast } = useToast();
+  const [activeItem, setActiveItem] = useState('Overview');
+
   return (
     <nav className="hidden md:flex items-center gap-1">
       {NAV_ITEMS.map((item) => (
         <button
           key={item.label}
+          onClick={() => {
+            setActiveItem(item.label);
+            showToast(`Navigated to ${item.label}`, 'info');
+          }}
           className={cn(
             "px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200",
-            item.active 
+            activeItem === item.label
               ? "bg-white/10 text-white" 
               : "text-slate-400 hover:text-white hover:bg-white/5"
           )}
@@ -74,13 +82,27 @@ function UserMenu() {
 }
 
 function IconButtons({ onMenuClick }: { onMenuClick: () => void }) {
+  const { showToast } = useToast();
+  const [hasNotifications, setHasNotifications] = useState(true);
+
   return (
     <div className="flex items-center gap-2">
-      <button className="relative p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5">
+      <button 
+        className="relative p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+        onClick={() => {
+          setHasNotifications(false);
+          showToast('No new notifications', 'info');
+        }}
+      >
         <Bell className="w-5 h-5" />
-        <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
+        {hasNotifications && (
+          <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
+        )}
       </button>
-      <button className="hidden sm:flex p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5">
+      <button 
+        className="hidden sm:flex p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+        onClick={() => showToast('Settings panel coming soon!', 'info')}
+      >
         <Settings className="w-5 h-5" />
       </button>
       <button 

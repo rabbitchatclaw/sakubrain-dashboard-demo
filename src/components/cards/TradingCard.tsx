@@ -4,9 +4,12 @@
 
 'use client';
 
-import { TrendingUp, TrendingDown, Eye, Plus, Bell, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, TrendingDown, Eye, Plus, Bell, ArrowUpRight, ArrowDownRight, List } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Asset, Portfolio, TradingFilters } from '@/types';
+import { useToast } from '@/components/ui/Toast';
+import { useModal } from '@/components/ui/Modal';
+import { AddAssetForm } from '@/components/ui/Forms';
 
 // ============================================================================
 // CONSTANTS
@@ -112,7 +115,16 @@ interface AssetRowProps {
 }
 
 function AssetRow({ asset, onToggleAlerts }: AssetRowProps) {
+  const { showToast } = useToast();
   const isPositive = asset.change >= 0;
+  
+  const handleToggleAlerts = () => {
+    onToggleAlerts();
+    showToast(
+      `${asset.symbol} alerts ${asset.alerts ? 'disabled' : 'enabled'} 🔔`,
+      asset.alerts ? 'info' : 'success'
+    );
+  };
 
   return (
     <div className="group flex items-center sm:grid sm:grid-cols-12 gap-4 px-6 py-4 hover:bg-white/5 transition-colors">
@@ -163,7 +175,7 @@ function AssetRow({ asset, onToggleAlerts }: AssetRowProps) {
 
       <div className="sm:col-span-1 flex items-center justify-end sm:justify-center">
         <button
-          onClick={onToggleAlerts}
+          onClick={handleToggleAlerts}
           className={cn(
             "p-1.5 rounded-lg transition-colors",
             asset.alerts
@@ -171,7 +183,7 @@ function AssetRow({ asset, onToggleAlerts }: AssetRowProps) {
               : "text-slate-500 hover:text-slate-300"
           )}
         >
-          <Bell className="w-4 h-4" />
+          <Bell className={cn("w-4 h-4", asset.alerts && "animate-pulse")} />
         </button>
       </div>
 
@@ -209,6 +221,18 @@ export function TradingWatchlistCard({
   onToggleAlerts,
   isLoading = false,
 }: TradingWatchlistCardProps) {
+  const { showToast } = useToast();
+  const { openModal } = useModal();
+
+  const handleAddAsset = () => {
+    openModal(
+      <AddAssetForm onAdd={(newAsset) => {
+        showToast(`Added ${newAsset.symbol} to watchlist! 📈`, 'success');
+      }} />,
+      'Add Asset to Watchlist'
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="rounded-2xl bg-slate-900/50 border border-white/10 overflow-hidden">
@@ -241,10 +265,16 @@ export function TradingWatchlistCard({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5">
+            <button 
+              className="p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+              onClick={() => showToast('Watchlist view toggled 👁️', 'info')}
+            >
               <Eye className="w-5 h-5" />
             </button>
-            <button className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors">
+            <button 
+              onClick={handleAddAsset}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors"
+            >
               <Plus className="w-4 h-4" />
               Add
             </button>
@@ -275,7 +305,10 @@ export function TradingWatchlistCard({
       </div>
 
       <div className="p-4 border-t border-white/10">
-        <button className="w-full py-2 text-sm font-medium text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors">
+        <button 
+          onClick={() => showToast('Full asset list view coming soon! 📊', 'info')}
+          className="w-full py-2 text-sm font-medium text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+        >
           View All Assets
         </button>
       </div>

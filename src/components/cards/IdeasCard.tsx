@@ -4,10 +4,13 @@
 
 'use client';
 
-import { Lightbulb, CheckCircle2, XCircle, Clock, Search, Plus } from 'lucide-react';
+import { Lightbulb, CheckCircle2, XCircle, Clock, Search, Plus, Edit3, Archive } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Idea, IdeaStats, IdeaFilters, IdeaValidationStep } from '@/types';
 import { CircularProgress } from '@/components/ui/Common';
+import { useToast } from '@/components/ui/Toast';
+import { useModal } from '@/components/ui/Modal';
+import { AddIdeaForm } from '@/components/ui/Forms';
 
 // ============================================================================
 // CONSTANTS
@@ -69,6 +72,7 @@ interface IdeaCardProps {
 }
 
 function IdeaCard({ idea, isExpanded, onToggle, onToggleValidation }: IdeaCardProps) {
+  const { showToast } = useToast();
   const progress = calculateProgress(idea.validation);
   const progressColor = progress >= 50 ? '#10b981' : '#6366f1';
 
@@ -151,10 +155,24 @@ function IdeaCard({ idea, isExpanded, onToggle, onToggleValidation }: IdeaCardPr
           </div>
 
           <div className="mt-4 flex gap-2">
-            <button className="flex-1 py-2 text-sm font-medium text-white bg-violet-500/20 hover:bg-violet-500/30 rounded-lg transition-colors">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                showToast(`Edit mode for "${idea.title}" - Form coming soon!`, 'info');
+              }}
+              className="flex items-center justify-center gap-2 flex-1 py-2 text-sm font-medium text-white bg-violet-500/20 hover:bg-violet-500/30 rounded-lg transition-colors"
+            >
+              <Edit3 className="w-4 h-4" />
               Edit Idea
             </button>
-            <button className="flex-1 py-2 text-sm font-medium text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                showToast(`"${idea.title}" archived successfully`, 'success');
+              }}
+              className="flex items-center justify-center gap-2 flex-1 py-2 text-sm font-medium text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <Archive className="w-4 h-4" />
               Archive
             </button>
           </div>
@@ -252,6 +270,18 @@ export function IdeasSectionCard({
   onToggleExpanded,
   isLoading = false,
 }: IdeasSectionCardProps) {
+  const { showToast } = useToast();
+  const { openModal } = useModal();
+
+  const handleAddIdea = () => {
+    openModal(
+      <AddIdeaForm onAdd={(newIdea) => {
+        showToast(`New idea added: ${newIdea.title} 💡`, 'success');
+      }} />,
+      'Add New Idea'
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="rounded-2xl bg-slate-900/50 border border-white/10 overflow-hidden">
@@ -279,7 +309,10 @@ export function IdeasSectionCard({
               <p className="text-sm text-slate-400">Validate and track your startup ideas</p>
             </div>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-violet-500 hover:bg-violet-600 rounded-lg transition-colors">
+          <button 
+            onClick={handleAddIdea}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-violet-500 hover:bg-violet-600 rounded-lg transition-colors"
+          >
             <Plus className="w-4 h-4" />
             New Idea
           </button>
@@ -295,8 +328,19 @@ export function IdeasSectionCard({
             key={idea.id}
             idea={idea}
             isExpanded={expandedIdeaId === idea.id}
-            onToggle={() => onToggleExpanded(idea.id)}
-            onToggleValidation={(stepKey) => onToggleValidation(idea.id, stepKey)}
+            onToggle={() => {
+              onToggleExpanded(idea.id);
+              if (expandedIdeaId !== idea.id) {
+                showToast(`Viewing: ${idea.title}`, 'info');
+              }
+            }}
+            onToggleValidation={(stepKey) => {
+              onToggleValidation(idea.id, stepKey);
+              const step = VALIDATION_STEPS.find(s => s.key === stepKey);
+              if (step) {
+                showToast(`${step.label} toggled for "${idea.title}"`, 'success');
+              }
+            }}
           />
         ))}
 
