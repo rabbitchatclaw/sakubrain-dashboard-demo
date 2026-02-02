@@ -58,7 +58,7 @@ function DesktopNav() {
         if (section.element) {
           const offsetTop = section.element.offsetTop;
           if (scrollPosition >= offsetTop) {
-            setActiveItem(item.id);
+            setActiveItem(section.id);
             break;
           }
         }
