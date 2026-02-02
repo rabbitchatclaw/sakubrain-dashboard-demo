@@ -113,54 +113,64 @@ function DashboardContent() {
       <Header />
       <div className="container mx-auto px-4 py-8">
         {/* Stats Overview */}
-        {stats.state.data && <StatsGrid stats={stats.state.data} />}
+        <section id="overview">
+          {stats.state.data && <StatsGrid stats={stats.state.data} />}
+        </section>
         
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
           {/* Learning Progress */}
-          <LearningProgressCard
-            monthlyData={learning.monthlyData.state.data || []}
-            recentBooks={learning.recentBooks.state.data || []}
-            skills={learning.skills.state.data || []}
-            summary={learning.summary.state.data || { totalBooksRead: 0, totalStudyHours: 0, totalSkills: 0 }}
-            isLoading={learning.monthlyData.state.status === 'loading'}
-          />
+          <section id="learning">
+            <LearningProgressCard
+              monthlyData={learning.monthlyData.state.data || []}
+              recentBooks={learning.recentBooks.state.data || []}
+              skills={learning.skills.state.data || []}
+              summary={learning.summary.state.data || { totalBooksRead: 0, totalStudyHours: 0, totalSkills: 0 }}
+              isLoading={learning.monthlyData.state.status === 'loading'}
+            />
+          </section>
 
           {/* Habit Tracker */}
-          <HabitTrackerCard
-            habits={habits.habits.state.data || []}
-            principles={habits.principles.state.data || []}
-            stats={habits.stats.state.data || { totalStreak: 0, completedToday: 0, totalHabits: 0, successRate: 0 }}
-            dailyGoal={habits.dailyGoal}
-            showPrinciples={habits.showPrinciples}
-            onTogglePrinciples={() => habits.setShowPrinciples(!habits.showPrinciples)}
-            onToggleHabitDay={habits.toggleHabitDay}
-            isLoading={habits.habits.state.status === 'loading'}
-          />
+          <section id="habits">
+            <HabitTrackerCard
+              habits={habits.habits.state.data || []}
+              principles={habits.principles.state.data || []}
+              stats={habits.stats.state.data || { totalStreak: 0, completedToday: 0, totalHabits: 0, successRate: 0 }}
+              dailyGoal={habits.dailyGoal}
+              showPrinciples={habits.showPrinciples}
+              onTogglePrinciples={() => habits.setShowPrinciples(!habits.showPrinciples)}
+              onToggleHabitDay={habits.toggleHabitDay}
+              isLoading={habits.habits.state.status === 'loading'}
+            />
+          </section>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
           {/* Ideas Section */}
-          <IdeasSectionCard
-            ideas={ideas.ideas.state.data || []}
-            stats={ideas.stats.state.data || { totalIdeas: 0, validatedIdeas: 0, ideasByStage: { idea: 0, validation: 0, mvp: 0, revenue: 0 } }}
-            filters={ideas.filters}
-            expandedIdeaId={ideas.expandedIdeaId}
-            onUpdateFilters={ideas.updateFilters}
-            onToggleValidation={ideas.toggleValidationStep}
-            onToggleExpanded={ideas.toggleExpanded}
-            isLoading={ideas.ideas.state.status === 'loading'}
-          />
+          <section id="ideas">
+            <IdeasSectionCard
+              ideas={ideas.ideas.state.data || []}
+              stats={ideas.stats.state.data || { totalIdeas: 0, validatedIdeas: 0, ideasByStage: { idea: 0, validation: 0, mvp: 0, revenue: 0 } }}
+              filters={ideas.filters}
+              expandedIdeaId={ideas.expandedIdeaId}
+              onUpdateFilters={ideas.updateFilters}
+              onToggleValidation={ideas.toggleValidationStep}
+              onToggleExpanded={ideas.toggleExpanded}
+              isLoading={ideas.ideas.state.status === 'loading'}
+            />
+          </section>
 
           {/* Trading Watchlist */}
-          <TradingWatchlistCard
-            assets={trading.assets.state.data || []}
-            portfolio={trading.portfolio.state.data || { totalValue: 0, dayChange: 0, dayChangePercent: 0, totalReturn: 0, totalReturnPercent: 0 }}
-            filters={trading.filters}
-            onUpdateFilters={trading.updateFilters}
-            onToggleAlerts={trading.toggleAlerts}
-            isLoading={trading.assets.state.status === 'loading'}
-          />
+          <section id="trading">
+            <TradingWatchlistCard
+              assets={trading.assets.state.data || []}
+              portfolio={trading.portfolio.state.data || { totalValue: 0, dayChange: 0, dayChangePercent: 0, totalReturn: 0, totalReturnPercent: 0 }}
+              filters={trading.filters}
+              onUpdateFilters={trading.updateFilters}
+              onToggleAlerts={trading.toggleAlerts}
+              isLoading={trading.assets.state.status === 'loading'}
+            />
+          </section>
         </div>
       </div>
     </main>

@@ -1,5 +1,5 @@
 /**
- * Mock Data Layer
+ * Mock Data Layer - Enhanced
  * Can be easily replaced with real API data later
  */
 
@@ -58,7 +58,7 @@ export const mockStats: StatMetric[] = [
 ];
 
 // ============================================================================
-// LEARNING DATA
+// LEARNING DATA - ENHANCED
 // ============================================================================
 
 export const mockMonthlyData: MonthlyLearningData[] = [
@@ -106,18 +106,36 @@ export const mockBooks: Book[] = [
     progress: 30, 
     category: 'Psychology',
   },
+  { 
+    id: '5', 
+    title: 'Zero to One', 
+    author: 'Peter Thiel', 
+    progress: 100, 
+    category: 'Business',
+    completedAt: new Date('2024-02-01'),
+  },
+  { 
+    id: '6', 
+    title: 'The Lean Startup', 
+    author: 'Eric Ries', 
+    progress: 45, 
+    category: 'Startup',
+  },
 ];
 
 export const mockSkills: Skill[] = [
   { id: '1', name: 'TypeScript', level: 85, category: 'Programming' },
   { id: '2', name: 'React', level: 90, category: 'Programming' },
-  { id: '3', name: 'Data Analysis', level: 70, category: 'Analytics' },
-  { id: '4', name: 'UI/UX Design', level: 75, category: 'Design' },
-  { id: '5', name: 'Public Speaking', level: 60, category: 'Soft Skills' },
+  { id: '3', name: 'Next.js', level: 80, category: 'Programming' },
+  { id: '4', name: 'Data Analysis', level: 70, category: 'Analytics' },
+  { id: '5', name: 'UI/UX Design', level: 75, category: 'Design' },
+  { id: '6', name: 'Public Speaking', level: 60, category: 'Soft Skills' },
+  { id: '7', name: 'System Design', level: 65, category: 'Architecture' },
+  { id: '8', name: 'Machine Learning', level: 45, category: 'AI/ML' },
 ];
 
 // ============================================================================
-// HABIT DATA
+// HABIT DATA - ENHANCED
 // ============================================================================
 
 export const mockHabits: Habit[] = [
@@ -171,24 +189,44 @@ export const mockHabits: Habit[] = [
     createdAt: new Date('2024-02-20'),
     targetDaysPerWeek: 5,
   },
+  {
+    id: '6',
+    name: 'Learn Thai',
+    streak: 34,
+    completed: [true, true, true, true, true, false, true],
+    color: 'from-violet-500 to-purple-500',
+    category: 'Language',
+    createdAt: new Date('2024-01-15'),
+    targetDaysPerWeek: 6,
+  },
+  {
+    id: '7',
+    name: 'No Sugar',
+    streak: 15,
+    completed: [true, true, false, true, true, true, false],
+    color: 'from-rose-400 to-red-500',
+    category: 'Health',
+    createdAt: new Date('2024-02-10'),
+    targetDaysPerWeek: 7,
+  },
 ];
 
 export const mockAtomicPrinciples: AtomicPrinciple[] = [
-  { id: '1', order: 1, principle: 'Make it Obvious', description: 'Stack habits with existing routines' },
-  { id: '2', order: 2, principle: 'Make it Attractive', description: 'Pair with activities you enjoy' },
-  { id: '3', order: 3, principle: 'Make it Easy', description: 'Reduce friction, start small' },
-  { id: '4', order: 4, principle: 'Make it Satisfying', description: 'Track progress, celebrate wins' },
+  { id: '1', order: 1, principle: 'Make it Obvious', description: 'Stack habits with existing routines, use visual cues' },
+  { id: '2', order: 2, principle: 'Make it Attractive', description: 'Pair with activities you enjoy, join culture where desired behavior is normal' },
+  { id: '3', order: 3, principle: 'Make it Easy', description: 'Reduce friction, start with 2-minute version, automate when possible' },
+  { id: '4', order: 4, principle: 'Make it Satisfying', description: 'Track progress, celebrate wins, never miss twice' },
 ];
 
 // ============================================================================
-// IDEAS DATA
+// IDEAS DATA - ENHANCED
 // ============================================================================
 
 export const mockIdeas: Idea[] = [
   {
     id: '1',
     title: 'AI-powered Personal Finance Coach',
-    description: 'An app that analyzes spending patterns and provides personalized financial advice using AI.',
+    description: 'An app that analyzes spending patterns and provides personalized financial advice using AI. Connects to bank accounts, categorizes expenses, and suggests optimizations.',
     category: 'FinTech',
     stage: 'validation',
     impact: 'high',
@@ -200,12 +238,12 @@ export const mockIdeas: Idea[] = [
       firstUsers: false,
       revenue: false,
     },
-    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
   {
     id: '2',
     title: 'Micro-Learning Platform for Developers',
-    description: '5-minute daily coding challenges that compound into real skills over time.',
+    description: '5-minute daily coding challenges that compound into real skills over time. Gamified with streaks, leaderboards, and portfolio building.',
     category: 'EdTech',
     stage: 'mvp',
     impact: 'medium',
@@ -217,12 +255,12 @@ export const mockIdeas: Idea[] = [
       firstUsers: true,
       revenue: false,
     },
-    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 1 week ago
+    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
   },
   {
     id: '3',
     title: 'Decentralized Content Monetization',
-    description: 'A platform allowing creators to monetize content directly without platform fees.',
+    description: 'A platform allowing creators to monetize content directly without platform fees. Built on Solana for low transaction costs.',
     category: 'Web3',
     stage: 'idea',
     impact: 'high',
@@ -234,12 +272,12 @@ export const mockIdeas: Idea[] = [
       firstUsers: false,
       revenue: false,
     },
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
   },
   {
     id: '4',
     title: 'Smart Home Energy Optimizer',
-    description: 'IoT device that learns usage patterns and optimizes energy consumption automatically.',
+    description: 'IoT device that learns usage patterns and optimizes energy consumption automatically. Integrates with existing smart home systems.',
     category: 'IoT',
     stage: 'revenue',
     impact: 'medium',
@@ -251,12 +289,63 @@ export const mockIdeas: Idea[] = [
       firstUsers: true,
       revenue: true,
     },
-    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 1 month ago
+    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: '5',
+    title: 'Mental Health Companion App',
+    description: 'AI chatbot trained in CBT techniques for anxiety and depression support. 24/7 availability with escalation to human therapists.',
+    category: 'Health',
+    stage: 'validation',
+    impact: 'high',
+    validation: {
+      marketSize: true,
+      problemValidation: true,
+      solutionValidation: true,
+      mvpBuilt: false,
+      firstUsers: false,
+      revenue: false,
+    },
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: '6',
+    title: 'Remote Team Culture Platform',
+    description: 'Virtual office space with spontaneous conversations, team rituals, and culture building tools for distributed teams.',
+    category: 'SaaS',
+    stage: 'mvp',
+    impact: 'medium',
+    validation: {
+      marketSize: true,
+      problemValidation: true,
+      solutionValidation: true,
+      mvpBuilt: true,
+      firstUsers: false,
+      revenue: false,
+    },
+    createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: '7',
+    title: 'Sustainable Fashion Marketplace',
+    description: 'Curated marketplace for second-hand and upcycled fashion with AI-powered style matching and carbon footprint tracking.',
+    category: 'E-commerce',
+    stage: 'idea',
+    impact: 'medium',
+    validation: {
+      marketSize: true,
+      problemValidation: false,
+      solutionValidation: false,
+      mvpBuilt: false,
+      firstUsers: false,
+      revenue: false,
+    },
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
   },
 ];
 
 // ============================================================================
-// TRADING DATA
+// TRADING DATA - ENHANCED
 // ============================================================================
 
 export const mockAssets: Asset[] = [
@@ -337,12 +426,56 @@ export const mockAssets: Asset[] = [
     alerts: false,
     category: 'Crypto',
   },
+  {
+    symbol: 'GOOGL',
+    name: 'Alphabet Inc.',
+    price: 141.80,
+    change: 3.45,
+    changePercent: 2.49,
+    volume: '22.1M',
+    marketCap: '1.76T',
+    alerts: true,
+    category: 'Tech',
+  },
+  {
+    symbol: 'META',
+    name: 'Meta Platforms',
+    price: 398.72,
+    change: 8.92,
+    changePercent: 2.29,
+    volume: '18.5M',
+    marketCap: '1.02T',
+    alerts: false,
+    category: 'Tech',
+  },
+  {
+    symbol: 'NFLX',
+    name: 'Netflix, Inc.',
+    price: 587.43,
+    change: -12.34,
+    changePercent: -2.06,
+    volume: '5.2M',
+    marketCap: '258B',
+    alerts: true,
+    category: 'Entertainment',
+  },
+  {
+    symbol: 'SOL',
+    name: 'Solana',
+    price: 98.45,
+    change: 5.67,
+    changePercent: 6.11,
+    volume: '3.2B',
+    marketCap: '42B',
+    alerts: false,
+    category: 'Crypto',
+  },
 ];
 
 export const mockPortfolio = {
-  totalValue: 124567.89,
-  dayChange: 2345.67,
-  dayChangePercent: 1.92,
-  totalReturn: 18567.89,
-  totalReturnPercent: 17.53,
+  totalValue: 156789.45,
+  dayChange: 3456.78,
+  dayChangePercent: 2.25,
+  totalReturn: 26789.45,
+  totalReturnPercent: 20.61,
 };
