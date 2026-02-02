@@ -205,7 +205,7 @@ export interface IdeaFilters {
 // TRADING DOMAIN
 // ============================================================================
 
-export type AssetCategory = 'Tech' | 'Auto' | 'E-commerce' | 'Crypto' | 'Finance' | 'Other';
+export type AssetCategory = 'Tech' | 'Auto' | 'E-commerce' | 'Crypto' | 'Finance' | 'Entertainment' | 'Other';
 export type TimeRange = '1H' | '1D' | '1W' | '1M' | '3M' | '1Y' | 'ALL';
 
 export interface Asset {

@@ -119,7 +119,7 @@ export const mockBooks: Book[] = [
     title: 'The Lean Startup', 
     author: 'Eric Ries', 
     progress: 45, 
-    category: 'Startup',
+    category: 'Business',
   },
 ];
 
@@ -130,8 +130,8 @@ export const mockSkills: Skill[] = [
   { id: '4', name: 'Data Analysis', level: 70, category: 'Analytics' },
   { id: '5', name: 'UI/UX Design', level: 75, category: 'Design' },
   { id: '6', name: 'Public Speaking', level: 60, category: 'Soft Skills' },
-  { id: '7', name: 'System Design', level: 65, category: 'Architecture' },
-  { id: '8', name: 'Machine Learning', level: 45, category: 'AI/ML' },
+  { id: '7', name: 'System Design', level: 65, category: 'Other' },
+  { id: '8', name: 'Machine Learning', level: 45, category: 'Other' },
 ];
 
 // ============================================================================
@@ -195,7 +195,7 @@ export const mockHabits: Habit[] = [
     streak: 34,
     completed: [true, true, true, true, true, false, true],
     color: 'from-violet-500 to-purple-500',
-    category: 'Language',
+    category: 'Learning',
     createdAt: new Date('2024-01-15'),
     targetDaysPerWeek: 6,
   },
@@ -205,7 +205,7 @@ export const mockHabits: Habit[] = [
     streak: 15,
     completed: [true, true, false, true, true, true, false],
     color: 'from-rose-400 to-red-500',
-    category: 'Health',
+    category: 'Wellness',
     createdAt: new Date('2024-02-10'),
     targetDaysPerWeek: 7,
   },
@@ -295,7 +295,7 @@ export const mockIdeas: Idea[] = [
     id: '5',
     title: 'Mental Health Companion App',
     description: 'AI chatbot trained in CBT techniques for anxiety and depression support. 24/7 availability with escalation to human therapists.',
-    category: 'Health',
+    category: 'Other',
     stage: 'validation',
     impact: 'high',
     validation: {
@@ -329,7 +329,7 @@ export const mockIdeas: Idea[] = [
     id: '7',
     title: 'Sustainable Fashion Marketplace',
     description: 'Curated marketplace for second-hand and upcycled fashion with AI-powered style matching and carbon footprint tracking.',
-    category: 'E-commerce',
+    category: 'Other',
     stage: 'idea',
     impact: 'medium',
     validation: {
